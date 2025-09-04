@@ -11,5 +11,8 @@
   },
   "author": "Jahleel Townsend",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "firebase": "^12.2.1"
+  }
 }
