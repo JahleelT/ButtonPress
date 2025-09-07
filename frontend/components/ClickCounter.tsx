@@ -1,19 +1,31 @@
 import React, {useEffect, useState } from 'react';
 import { useAuth } from '../src/contexts/AuthContext';
-import { incrementUserClicks, getUserClicks } from '../services/firestore';
+import { incrementUserClicks, getUserClicks, subscribeToUserClicks } from '../services/firestore';
 
-const ClickCounter: React.FC = () => {
+
+export const ClickCounter: React.FC = () => {
   const { user } = useAuth();
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     if (!user) return;
-    // TODO: fetch initial count from Firestore
+
+    getUserClicks(user.uid).then(setCount);
+
+    const unsub = subscribeToUserClicks(user.uid, setCount);
+
+    return () => {
+      unsub();
+    };
   }, [user]);
 
   const handleClick = async () => {
     if (!user) return;
-    // TODO: increment in firestore + update state
+    try {
+      await incrementUserClicks(user.uid);
+    } catch (error) {
+      console.error("Error encountered:", error);
+    }
   };
 
   return (
