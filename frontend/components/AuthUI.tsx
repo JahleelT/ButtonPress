@@ -1,7 +1,7 @@
 import { useAuth } from '../src/contexts/AuthContext';
 import React, { useState }  from 'react';
 
-const AuthUI: React.FC = () => {
+export const AuthUI: React.FC = () => {
   const { user, loading, signUp, signIn, signOut } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -27,3 +27,5 @@ const AuthUI: React.FC = () => {
     </div>
   )
 }
+
+export default AuthUI;
