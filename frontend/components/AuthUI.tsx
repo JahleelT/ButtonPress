@@ -2,7 +2,7 @@ import { useAuth } from '../src/contexts/AuthContext';
 import { ClickCounter } from './ClickCounter';
 import React, { useState }  from 'react';
 import { Button } from './Button';
-import tailwindcss from '@tailwindcss/vite';
+import 'tailwindcss';
 
 export const AuthUI: React.FC = () => {
   const { user, loading, signUp, signIn, signOut } = useAuth();
@@ -24,7 +24,7 @@ export const AuthUI: React.FC = () => {
         <p className="text-lg font-medium text-gray-700 mb-4">Welcome, {user.email}</p>
 
         <ClickCounter/>
-        
+
         <Button color="bg-red-500" onClick={signOut}>
           Sign Out
         </Button>
