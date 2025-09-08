@@ -1,6 +1,7 @@
 import React, {useEffect, useState } from 'react';
 import { useAuth } from '../src/contexts/AuthContext';
 import { incrementUserClicks, getUserClicks, subscribeToUserClicks } from '../services/firestore';
+import { Button } from './Button';
 
 
 export const ClickCounter: React.FC = () => {
@@ -29,11 +30,14 @@ export const ClickCounter: React.FC = () => {
   };
 
   return (
-    <div>
-      <p>Clicks: {count}</p>
-      <button onClick={handleClick} disabled={!user}>
+    <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm">
+      <p className="text-gray-700 font-medium mb-3">Clicks: {count}</p>
+      <Button
+        onClick={handleClick}
+        disabled={!user}
+      >
         Increase click count!
-      </button>
+      </Button>
     </div>
   );
 };
