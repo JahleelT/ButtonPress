@@ -63,7 +63,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       const token = await userCredential.user.getIdToken();
 
-      const res = await fetch("http://localhost:3001/api/protected", {
+      const res = await fetch("https://backend-service-989215811929.us-central1.run.app/api/protected", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
