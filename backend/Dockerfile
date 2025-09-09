@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3001
 
 # Start app
-CMD ["node", "server.ts"]
+CMD ["node", "server.js"]
