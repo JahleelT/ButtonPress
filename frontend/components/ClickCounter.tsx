@@ -31,7 +31,7 @@ export const ClickCounter: React.FC = () => {
 
   return (
     <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm">
-      <p className="text-gray-700 font-medium mb-3">Clicks: {count}</p>
+      <p className="text-center text-gray-700 font-medium mb-3  ">Clicks: {count}</p>
       <Button
         onClick={handleClick}
         disabled={!user}

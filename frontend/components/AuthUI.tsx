@@ -20,7 +20,7 @@ export const AuthUI: React.FC = () => {
       /* Logged In UI */
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
 
-        <p className="text-lg font-medium text-gray-700 mb-4">Welcome, {user.email}!</p>
+        <p className="text-center text-lg font-medium text-gray-700 mb-4">Welcome, {user.email}!</p>
 
         <ClickCounter/>
 
@@ -35,7 +35,7 @@ export const AuthUI: React.FC = () => {
       /* Logged Out UI */
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
 
-        <p className="text-lg font-medium text-gray-700 mb-4">Welcome! Please Sign In or Up to Get Started!</p>
+        <p className="text-center text-lg font-medium text-gray-700 mb-4">Welcome! Please Sign In or Up to Get Started!</p>
 
         <input 
           type="email"
