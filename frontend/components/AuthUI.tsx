@@ -2,7 +2,6 @@ import { useAuth } from '../src/contexts/AuthContext';
 import { ClickCounter } from './ClickCounter';
 import React, { useState }  from 'react';
 import { Button } from './Button';
-import 'tailwindcss';
 
 export const AuthUI: React.FC = () => {
   const { user, loading, signUp, signIn, signOut } = useAuth();
@@ -13,15 +12,15 @@ export const AuthUI: React.FC = () => {
   if (loading) {
     return <p>Loading...</p>;
   }
-
+  // from-cyan-500 via-sky-500 via-blue-500 via-indigo-500 via-violet-500 via-purple-500 to-fuchsia-500
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-500 via-sky-500 via-blue-500 via-indigo-500 via-violet-500 via-purple-500 to-fuchsia-500 p-4">
       { (user) ?  
       
       /* Logged In UI */
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
 
-        <p className="text-lg font-medium text-gray-700 mb-4">Welcome, {user.email}</p>
+        <p className="text-lg font-medium text-gray-700 mb-4">Welcome, {user.email}!</p>
 
         <ClickCounter/>
 
