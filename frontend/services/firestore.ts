@@ -1,4 +1,4 @@
-import { db } from './firebase';
+import { db } from './firebase.ts';
 import { doc, getDoc, setDoc, increment, onSnapshot } from 'firebase/firestore';
 
 export async function incrementUserClicks(uid:string) {

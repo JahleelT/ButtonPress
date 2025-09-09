@@ -2,7 +2,7 @@ import React, {useState, createContext, useContext, useEffect } from "react";
 import type { ReactNode } from 'react';
 import  { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut as firebaseSignOut} from 'firebase/auth';
 import type { User } from 'firebase/auth';
-import { auth } from '../../services/firebase';
+import { auth } from '../../services/firebase.ts';
 
 interface AuthContextType {
   user: User | null;
@@ -49,14 +49,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signUp = async (email:string, password:string): Promise<void> => {
     try {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
+      createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.error("Error signing up user: ", error);
     }
@@ -64,16 +57,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signIn = async (email:string, password:string): Promise<void> => {
     try {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      if (!userCredential.user) throw new Error("No user returned from sign in");
+
+      const token = await userCredential.user.getIdToken();
+
+      const res = await fetch("http://localhost:3001/api/protected", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      });
+
+      const data = await res.json();
+      console.log("Backend response:", data);
     } catch(error) {
-      console.error("Error singing user in: ", error);
+      console.error("Sign in error:", error);
     }
   }
 

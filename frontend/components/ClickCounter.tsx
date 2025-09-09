@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from 'react';
-import { useAuth } from '../src/contexts/AuthContext';
-import { incrementUserClicks, getUserClicks, subscribeToUserClicks } from '../services/firestore';
-import { Button } from './Button';
+import { useAuth } from '../src/contexts/AuthContext.tsx';
+import { incrementUserClicks, getUserClicks, subscribeToUserClicks } from '../services/firestore.ts';
+import { Button } from './Button.tsx';
 
 
 export const ClickCounter: React.FC = () => {
@@ -9,14 +9,22 @@ export const ClickCounter: React.FC = () => {
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user?.uid) return;
+
+    let unsub: (() => void) | undefined;
 
     getUserClicks(user.uid).then(setCount);
 
-    const unsub = subscribeToUserClicks(user.uid, setCount);
+    try {
+      unsub = subscribeToUserClicks(user.uid, setCount);
+      
+    } catch (error) {
+      console.error("Error subscribing to clicks ", error);
+      
+    }
 
     return () => {
-      unsub();
+      if (unsub) unsub();
     };
   }, [user]);
 

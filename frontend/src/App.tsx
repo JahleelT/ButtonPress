@@ -1,5 +1,5 @@
-import { AuthProvider } from './contexts/AuthContext'
-import { AuthUI } from '../components/AuthUI';
+import { AuthProvider } from './contexts/AuthContext.tsx'
+import { AuthUI } from '../components/AuthUI.tsx';
 
 function App() {
 
